@@ -1,7 +1,7 @@
 //Pacman AI
 //this program requires a desktop screen 1920 x 1080 to look sexy
 
-
+//COMMENT
 //import stuff for pathfinding
 import java.util.Deque;
 import java.util.Iterator;
