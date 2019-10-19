@@ -93,7 +93,8 @@ int[][] tilesRepresentation = {
 void setup() {
   frameRate(100);
   //size(448, 496);
-  fullScreen();
+  //surface.setResizable(true);
+  fullScreen(SPAN);
   img = loadImage("map.jpg");
   blinkySprite = loadImage("blinky20000.png");
   pinkySprite = loadImage("pinky20000.png");
@@ -105,10 +106,14 @@ void setup() {
   //  blinkySprite = resizeBasic(blinkySprite, 2);
   //((PGraphicsOpenGL)g).textureSampling(3);
   img = resizeBasic(img, 2);
+  blinkySprite = resizeBasic(blinkySprite, 2);
+  
   pac = loadImage("pac.png");
+  
+  pac = resizeBasic(pac, 2);
 
 
-  //img.resize(448 *3, 496 *3);
+  //img.resize(448 /2, 496 /2);
   //initiate tiles
   for (int i = 0; i< 28; i++) {
     for (int j = 0; j< 31; j++) {
@@ -501,7 +506,7 @@ PVector getNearestNonWallTile(PVector target) {
 
 PVector tileToPixel(PVector tileCoord) {
   PVector pix = new PVector(tileCoord.x * 16 +8, tileCoord.y * 16 +8);
-  pix.mult(2);//scaleUp
+  pix.mult(2);//scaleUp                                                    
   pix.x += 500;
   pix.y +=  height - 496 *2.0;
   return pix;
