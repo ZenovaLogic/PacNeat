@@ -109,9 +109,6 @@ void setup() {
   blinkySprite = resizeBasic(blinkySprite, 2);
   
   pac = loadImage("pac.png");
-  
-  pac = resizeBasic(pac, 2);
-
 
   //img.resize(448 /2, 496 /2);
   //initiate tiles
