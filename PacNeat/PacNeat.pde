@@ -57,8 +57,8 @@ boolean showNothing = false;
 int previousBest = 0;
 Tile[][] originalTiles = new Tile[31][28]; //note it goes y then x because of how I inserted the data
 int[][] tilesRepresentation = { 
-  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
-  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // 28 to a row
+  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 31 rows
   {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1}, 
   {1, 8, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 8, 1}, 
   {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1}, 
@@ -71,30 +71,29 @@ int[][] tilesRepresentation = {
   {1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1}, 
   {1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1}, 
   {1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1}, 
-  {1, 1, 1, 1, 1, 1, 0, 6, 6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 6, 6, 0, 1, 1, 1, 1, 1, 1}, 
+  {1, 6, 6, 6, 6, 6, 0, 6, 6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 6, 6, 0, 6, 6, 6, 6, 6, 1}, 
   {1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1}, 
   {1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1}, 
   {1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1}, 
   {1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1}, 
   {1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1}, 
   {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-  {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1}, 
-  {1, 8, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 8, 1}, 
-  {1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1}, 
+  {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1}, // 6 is an EMPTY SPACE
+  {1, 8, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 8, 1}, // 8 is BIG FOOD!!!!!!!!!
+  {1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1}, // 1 is WALL
   {1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1}, 
   {1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1}, 
   {1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1}, 
   {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1}, 
-  {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1}, 
-  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
+  {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1}, // 0 is food!!!!!!!!!!!
+  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 0 is food!!!!!!!!!!!
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};//its not sexy but it does the job
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
 void setup() {
   frameRate(100);
   //size(448, 496);
-  //surface.setResizable(true);
-  fullScreen(SPAN);
+  fullScreen();
   img = loadImage("map.jpg");
   blinkySprite = loadImage("blinky20000.png");
   pinkySprite = loadImage("pinky20000.png");
@@ -103,24 +102,20 @@ void setup() {
   frightenedSprite = loadImage("frightenedGhost0000.png");
   frightenedSprite2 = loadImage("frightenedGhost20000.png");
   deadSprite = loadImage("deadGhost0000.png");
-  //  blinkySprite = resizeBasic(blinkySprite, 2);
+  //  blinkySprite = resizeBasic(blinkySprite, 1);
   //((PGraphicsOpenGL)g).textureSampling(3);
-  img = resizeBasic(img, 2);
-  blinkySprite = resizeBasic(blinkySprite, 2);
-  
+  img = resizeBasic(img, 1);
   pac = loadImage("pac.png");
-  
-  pac = resizeBasic(pac, 2);
 
 
-  //img.resize(448 /2, 496 /2);
-  //initiate tiles
+  //img.resize(448 *3, 496 *3);
+  //initiate tiles <-------------------------- !!!!!!!!!!
   for (int i = 0; i< 28; i++) {
     for (int j = 0; j< 31; j++) {
-      PVector tileCoords = tileToPixel(new PVector(i, j));
+      PVector tileCoords = tileToPixel(new PVector(i, j)); ////////////////////////////////////////////////////////////////////////
       originalTiles[j][i] = new Tile(tileCoords.x, tileCoords.y);
       switch(tilesRepresentation[j][i]) {
-      case 1: //1 is a wall
+      case 1: //1 is a wall                // assigning the number values for the numerical map
         originalTiles[j][i].wall = true;
         break;
       case 0: // 0 is a dot
@@ -137,7 +132,7 @@ void setup() {
     }
   }
 
-  pop = new Population(500);
+  pop = new Population(500); // population of 500!!
   humanPlayer = new Player();
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------
@@ -256,7 +251,7 @@ void draw() {
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void enterStage(int stageNo) {
+void enterStage(int stageNo) {  // When things enter a stage?
   switch(stageNo) {
   case 1:
     usingInputsStart =  4;
@@ -319,28 +314,30 @@ void drawToScreen() {
     background(10);
     fill(0);
     rectMode(CORNERS);
-    rect(0, height/2 +100, width, height);
-    rect(498, 0, 502 + 448*2, height - 496 *2);
+    rect(0, height/2 +100, width/2, height/2);/////
+    rect(498, 0, (502 + 448*2)/2, (height - 496 *2)/2);/////
     strokeWeight(10);
     stroke(29, 48, 137);
     line(0, height/2 + 100, width, height/2+100);
     stroke(32, 56, 178);
-    strokeWeight(5);
+    strokeWeight(5);  ///////////////// HORIZONTAL LINE!
+
+    // WIDTH IS WIDTH OF MY SCREEN, HEIGHT IS HEIGHT OF MY SCREEN
 
     line(0, height/2 + 100, width, height/2+100);
 
     image(img, 500, height - 496 *2);
     strokeWeight(10);
     stroke(29, 48, 137);
-    line(498, 0, 498, height);
-    line(502 + 448 *2, 0, 502 + 448 *2, height);
+    line(498, 0, 498, height/2);
+    line(502 + 448 *2, 0, 502 + 448 *2, height/2);
     stroke(32, 56, 178);
-    strokeWeight(5);
+    strokeWeight(5);    ///////////////// VERTICAL LINE
 
-    line(498, 0, 498, height);
-    line(502 + 448 *2, 0, 502 + 448 *2, height);
-    
-    
+    line(498/2, 0/2, 498, height/2);
+    line((502 + 448 *2)/2, 0/2, 502 + 448 *2, height/2);
+
+
     drawBrain();
     writeInfo();
   }
@@ -502,31 +499,31 @@ PVector getNearestNonWallTile(PVector target) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------
-//converts tile coordinates to pixel coords
+//converts tile coordinates to pixel coords            WHAT does this function do? best leave this alone?
 
 PVector tileToPixel(PVector tileCoord) {
   PVector pix = new PVector(tileCoord.x * 16 +8, tileCoord.y * 16 +8);
-  pix.mult(2);//scaleUp                                                    
-  pix.x += 500;
+  pix.mult(2);//scaleUp
+  pix.x += 500; // crashes if it's 100 for example
   pix.y +=  height - 496 *2.0;
   return pix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-//converts pixel coordinates to tile coordinates
+//converts pixel coordinates to tile coordinates      WHAT does this function do? best leave this alone?
 
 PVector pixelToTile(PVector pix) {
 
-  PVector tileCoord = new PVector(pix.x - 500, pix.y - (height - 496 *2));
+  PVector tileCoord = new PVector(pix.x - 500, pix.y - (height - 496 *2)); // pix.x -1000 leads to indexoutofbounds, same with change height
   tileCoord.x /= 2.0;
-  tileCoord.y /= 2.0;
+  tileCoord.y /= 2.0; // making these 1 seems to crash the game. Make higher does nothing? What do they do?
 
   PVector finalTileCoord = new PVector((tileCoord.x-8)/16, (tileCoord.y - 8)/16);
   return finalTileCoord;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-//checks whether the parameter position is in the center of a tile
+//checks whether the parameter position is in the center of a tile  -WHAT?
 
 boolean isCriticalPosition(PVector pos) {
   PVector tileCoord = new PVector(pos.x - 500, pos.y - height - 496 *2);
@@ -600,7 +597,7 @@ Path AStar(PathNode start, PathNode finish, PVector vel)
 
             //if the direction to the new node is in the opposite to the way the path was heading then dont count this path
             PVector directionToPathNode = new PVector( extend.path.getLast().edges.get(i).x -extend.path.getLast().x, extend.path.getLast().edges.get(i).y - extend.path.getLast().y );
-            directionToPathNode.limit(vel.mag());
+            directionToPathNode.limit(vel.mag());  //////MAGNITUDE OF PVECTOR
             if (directionToPathNode.x == -1* extend.velAtLast.x && directionToPathNode.y == -1* extend.velAtLast.y ) {
             } else {//if not turning around
               extended = extend.clone();

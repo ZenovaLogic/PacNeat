@@ -26,11 +26,11 @@ class PathNode {
     isGhost = true;
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------------
-  //draw a litle circle
+  //draw a litle circle            ???? what circle where? NO IDEA
   void show() {
     fill(0, 100, 100);
     PVector pixel = tileToPixel(new PVector(x,y));
-    ellipse(pixel.x, pixel.y,10,10);
+    ellipse(pixel.x, pixel.y,10,10); // x, y, width, height
   }
 
   //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ class PathNode {
     }
   }
 
-  PathNode clone() {
+  PathNode clone() {                          //clone.... tile also has a clone method!
     PathNode clone = new PathNode(x, y); 
     clone.isGhost = isGhost;
     return clone;

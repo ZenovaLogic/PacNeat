@@ -1,3 +1,4 @@
+// THE PATHS FROM THE GHOSTS
 class Path {
   LinkedList<PathNode> path = new LinkedList<PathNode>();//a list of nodes 
   float distance = 0;//length of path
@@ -21,7 +22,7 @@ class Path {
     distToFinish = dist(path.getLast().x, path.getLast().y, endPathNode.x, endPathNode.y);//recalculate the distance to the finish
   }
   //--------------------------------------------------------------------------------------------------------------------------------------------
-  //retrun a clone of this 
+  //retrun a clone of this           // the clone thing again
   Path clone()
   {
     Path temp = new Path();
@@ -40,9 +41,9 @@ class Path {
     path.clear();
   }
   //--------------------------------------------------------------------------------------------------------------------------------------------
-  //draw lines representing the path
+  //draw lines representing the path        THE PATHS FROM THE GHOSTS
   void show() {
-    strokeWeight(2);
+    strokeWeight(1);
     for (int i = 0; i< path.size()-1; i++) {
       PVector CoordOfNode = tileToPixel(new PVector(path.get(i).x, path.get(i).y));
 

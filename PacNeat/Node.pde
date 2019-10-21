@@ -65,7 +65,7 @@ class Node {
     return false;
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  //returns a copy of this node
+  //returns a copy of this node            // the clone thing again!!
   Node clone() {
     Node clone = new Node(number);
     clone.layer = layer;

@@ -15,18 +15,18 @@ class Tile {
     rectMode(CENTER);
     if (dot) {
       if (!eaten) {//draw dot
-        fill(255, 255, 0);
+        fill(0, 255, 0);
         noStroke();
-        rect(pos.x, pos.y, 4, 4);
+        rect(pos.x, pos.y, 8, 8); ///SIZE OF THE FOOD.
       }
     } else if (bigDot) {
       if (!eaten) {//draw big dot
-        fill(255, 255, 0);
+        fill(255, 255, 255);
         noStroke();
         if (bigDotsActive) {
-          rect(pos.x, pos.y, 9, 9);
+          rect(pos.x, pos.y, 9, 9); 
         } else {
-          rect(pos.x, pos.y, 4, 4);
+          rect(pos.x, pos.y, 4, 4); ///SIZE OF THE BIG FOOD
         }
       }
     }
@@ -34,7 +34,7 @@ class Tile {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 //returns a copy of this tile
   Tile clone() {
-    Tile clone = new Tile(pos.x, pos.y);
+    Tile clone = new Tile(pos.x/2, pos.y/2); //positioning of the rile
     clone.wall = wall;
     clone.dot = dot;
     clone.bigDot  = bigDot;
